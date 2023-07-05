@@ -4,4 +4,14 @@
 
 # LSL.DataUri
 
-Provide package documentation here.
+A quick and easy data uri parser
+
+## Quickstart
+
+```csharp
+using LSL.DataUri;
+...
+var result = DataUri.Parse("data:a/type;base64,AEWE");
+
+// result.Data contains the byte array of the data
+```
