@@ -10,7 +10,12 @@ namespace LSL.DataUri
     {
         private static Regex PartResolver = new Regex(@"^data:((?<mime>[\w/\-\.]+);)?(?<encoding>\w+),(?<data>.*)");
 
-        internal DataUri(byte[] data, string mimeType)
+        /// <summary>
+        /// Create a DataUri instance with the given data and mime type
+        /// </summary>
+        /// <param name="data">The binary data to encode</param>
+        /// <param name="mimeType">The mime-type of the data</param>
+        public DataUri(byte[] data, string mimeType)
         {
             Data = data;
             MimeType = mimeType;
@@ -46,5 +51,11 @@ namespace LSL.DataUri
         /// </summary>
         /// <value></value>
         public string MimeType { get; }
+
+        /// <summary>
+        /// Returns the string representation of the data URI
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => $"data:{MimeType};base64,{Convert.ToBase64String(Data)}";
     }
 }
