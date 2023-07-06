@@ -8,7 +8,7 @@ namespace LSL.DataUri
     /// </summary>
     public sealed class DataUri
     {
-        private static Regex PartResolver = new Regex(@"^data:(?<mime>[\w/\-\.]+;)?(?<encoding>\w+),(?<data>.*)");
+        private static Regex PartResolver = new Regex(@"^data:((?<mime>[\w/\-\.]+);)?(?<encoding>\w+),(?<data>.*)");
 
         internal DataUri(byte[] data, string mimeType)
         {
@@ -27,7 +27,7 @@ namespace LSL.DataUri
 
             if (!matchedData.Success)
             {
-                throw new ArgumentException($"The dataUri must be in base64 format to be parsed");
+                throw new ArgumentException($"The dataUri must be in base64 format to be parsed ({dataUri})");
             }
 
             var regexMatch = PartResolver.Match(dataUri);

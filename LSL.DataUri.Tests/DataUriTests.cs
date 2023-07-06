@@ -16,6 +16,16 @@ namespace LSL.DataUri.Tests
             var result = DataUri.Parse(uri);
 
             Convert.ToHexString(result.Data).Should().Be(expectedHexString);
+            result.MimeType.Should().Be(expectedContentType);
         }
+
+        [TestCase("data2:a/type;base64,AEWE")]
+        [TestCase("data:AEWE")]
+        public void GivenAnInvalidDataUri_ItShouldThrowAnArgumetnException(string uri)
+        {
+            using var scope = new AssertionScope();
+
+            new Action(() => DataUri.Parse(uri)).Should().Throw<ArgumentException>();
+        }        
     }
 }
