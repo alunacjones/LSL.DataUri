@@ -53,7 +53,7 @@ namespace LSL.DataUri.Tests
         [TestCase("data2:a/type;base64,AEWE")]
         [TestCase("data:a/type;base64,not-base-64!")]
         [TestCase("data:AEWE")]
-        public void DateUri_TryParse_GivenAnInvalidDataUri_ItShouldThrowAnArgumetnException(string uri)
+        public void DateUri_TryParse_GivenAnInvalidDataUri_ItShouldThrowReturnFalse(string uri)
         {
             using var scope = new AssertionScope();
 
