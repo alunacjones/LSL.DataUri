@@ -5,9 +5,9 @@
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-  
+
   <PropertyGroup>
-    <SnkFile>..\LSL.MessageUris\LSL.snk</SnkFile>
+    <SnkFile>..\LSL.DataUri\LSL.snk</SnkFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="Exists('$(SnkFile)')">
