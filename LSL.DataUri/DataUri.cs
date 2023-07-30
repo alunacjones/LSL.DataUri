@@ -65,14 +65,14 @@ namespace LSL.DataUri
         /// <returns></returns>
         public override string ToString() => $"data:{MimeType};base64,{Convert.ToBase64String(Data)}";
 
-        private static (bool Success, string Error) InnerTryParse(string dataUri, out DataUri result)
+        private static InnerTryParseResult InnerTryParse(string dataUri, out DataUri result)
         {
             var regexMatch = PartResolver.Match(dataUri);
 
             if (!regexMatch.Success)
             {
                 result = null;
-                return (false, $"The dataUri must be in base64 format to be parsed ({dataUri})");
+                return new InnerTryParseResult(false, $"The dataUri must be in base64 format to be parsed ({dataUri})");
             }
 
             try
@@ -80,12 +80,12 @@ namespace LSL.DataUri
                 var bytes = Convert.FromBase64String(regexMatch.Groups["data"].Value);
                 result = new DataUri(bytes, regexMatch.Groups["mime"].Value);
 
-                return (true, string.Empty);                
+                return new InnerTryParseResult(true, string.Empty);                
             }
             catch (FormatException e)
             {
                 result = null;
-                return (false, e.Message);            
+                return new InnerTryParseResult(false, e.Message);            
             }
         }
     }
